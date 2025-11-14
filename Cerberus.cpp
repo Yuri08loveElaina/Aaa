@@ -39,7 +39,6 @@ void generate_random_key(ENCRYPTION_KEY* key_struct) {
     RAND_bytes(key_struct->iv, IV_SIZE);
 }
 
-// << SỬA LỖI: Sử dụng PathRemoveFileSpecW để xử lý đường dẫn một cách an toàn và đáng tin cậy hơn.
 void securely_delete_file(const std::wstring& file_path) {
     HANDLE hFile = CreateFileW(file_path.c_str(), GENERIC_WRITE, 0, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
     if (hFile != INVALID_HANDLE_VALUE) {
@@ -58,7 +57,6 @@ void securely_delete_file(const std::wstring& file_path) {
     }
     random_name[RANDOM_NAME_LENGTH] = L'\0';
 
-    // << SỬA LỖI: Tạo một bản sao có thể chỉnh sửa của đường dẫn để PathRemoveFileSpecW hoạt động.
     wchar_t dir_path_buffer[MAX_PATH];
     wcscpy_s(dir_path_buffer, file_path.c_str());
     PathRemoveFileSpecW(dir_path_buffer);
